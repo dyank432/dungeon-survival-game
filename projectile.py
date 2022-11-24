@@ -8,6 +8,8 @@ class Projectile(pygame.sprite.Sprite):
 
         self.display_surface = pygame.display.get_surface()
 
+        self.sprite_type = 'weapon'
+
         self.speed = 6
         self.mx = (pygame.mouse.get_pos()[0] - WIDTH / 2)  
         self.my = -(pygame.mouse.get_pos()[1] - HEIGHT /2)

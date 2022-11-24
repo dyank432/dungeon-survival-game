@@ -18,8 +18,9 @@ UI_HP_COLOR = (181, 4, 4)
 UI_EXP_COLOR = (0, 161, 37) 
 
 # weapon data
-# Todo:
-
+weapon_data = {
+    'projectile': { 'cooldown': 100, 'damage': 5 }
+}
 # enemy data
 enemy_data = {
     'ghost': { 'hp': 5, 'exp': 5, 'damage': 5, 'speed': 3 }

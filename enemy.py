@@ -16,9 +16,13 @@ class Enemy(Entity):
         self.obstacle_sprites = obstacle_sprites
 
         self.animation_speed = 0.040
-
+        self.health = 15
         self.import_enemy_assets()
 
+        # invincibility frames
+        self.vulnerable = True
+        self.hit_time = 0
+        self.invincibility_duration = 300
 
     def import_enemy_assets(self):
         player_path = './assets/enemies/'
@@ -50,6 +54,25 @@ class Enemy(Entity):
 
         return (distance, direction)
     
+    def get_damage(self, player, attack_type):
+        if self.vulnerable:
+            if attack_type == 'weapon':
+                self.health -= player.get_total_damage()
+                # picture = pygame.image.load('./assets/enemies/damaged/ghost_damaged_0.png').convert_alpha()
+                # self.image = picture = pygame.transform.scale(picture, (64, 64))
+            self.hit_time = pygame.time.get_ticks()
+            self.vulnerable = False
+
+    def check_death(self):
+        if self.health <= 0:
+            self.kill()
+
+    def cooldown(self):
+        current_time = pygame.time.get_ticks()
+        if not self.vulnerable:
+            if current_time - self.hit_time >= self.invincibility_duration:
+                self.vulnerable = True
+
     def animate(self):
         animation = self.animations['walk']
 
@@ -67,3 +90,5 @@ class Enemy(Entity):
     def enemy_update(self, player):
         self.get_status(player)
         self.animate()
+        self.cooldown()
+        self.check_death()

@@ -17,6 +17,10 @@ class Level:
 		self.visible_sprites = YSortCameraGroup()
 		self.obstacle_sprites = pygame.sprite.Group()
 
+		# attack sprites
+		self.attack_sprites = pygame.sprite.Group()
+		self.attackable_sprites = pygame.sprite.Group()
+
 		# sprite setup
 		self.create_map()
 
@@ -43,11 +47,20 @@ class Level:
 					self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites, self.create_projectile)
 				# temp for enemy testing
 				if col == 'e':
-					Enemy('ghost', (x,y), [self.visible_sprites], self.obstacle_sprites)
+					Enemy('ghost', (x,y), [self.visible_sprites, self.attackable_sprites], self.obstacle_sprites)
 
 	def create_projectile(self):
-		Projectile(self.player, [self.visible_sprites] )
+		Projectile(self.player, [self.visible_sprites, self.attack_sprites] )
 
+	def player_attack_logic(self):
+		if self.attack_sprites:
+			for attack_sprite in self.attack_sprites:
+				collided_sprites = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
+				if collided_sprites:
+					for collision in collided_sprites:
+						if collision.sprite_type == 'enemy':
+							collision.get_damage(self.player, attack_sprite.sprite_type)
+						#collision.kill()
 
 	def run(self):
 		# update and draw the game
@@ -56,6 +69,7 @@ class Level:
 		self.visible_sprites.custom_draw(self.player)
 		self.visible_sprites.update()
 		self.visible_sprites.enemy_update(self.player)
+		self.player_attack_logic()
 		self.ui.display(self.player, self.counting_time)
 
 # Center the camera on the player

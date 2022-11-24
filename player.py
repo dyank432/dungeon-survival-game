@@ -107,6 +107,11 @@ class Player(Entity):
         # set image to current frame
         self.image = animation[int(self.frame)]
 
+    def get_total_damage(self):
+        base_dmg = self.damage
+        # add buff damage from items
+        return base_dmg
+
     def update(self):
         self.input()
         self.cooldowns()
