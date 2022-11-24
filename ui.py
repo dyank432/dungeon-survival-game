@@ -6,6 +6,8 @@ class UI:
         
         self.display_surface = pygame.display.get_surface()
         self.font = pygame.font.Font(UI_FONT, UI_FONT_SIZE)
+        self.timerFont = pygame.font.Font(UI_FONT, 24)
+
 
         # bars
         self.hp_bar_rect = pygame.Rect(10, 10, BAR_WIDTH, BAR_HEIGHT)
@@ -35,9 +37,23 @@ class UI:
 
         self.display_surface.blit(text_surface, text_rect)
 
-    def display(self, player):
+    def draw_timer_text(self, time):
+        # change milliseconds into minutes, seconds
+        counting_minutes = str(time//60000).zfill(2)
+        counting_seconds = str( (time%60000)//1000 ).zfill(2)
+
+        counting_string = "%s:%s" % (counting_minutes, counting_seconds)
+
+        text_surface = self.timerFont.render(str(counting_string),False,TEXT_COLOR)
+        text_rect = text_surface.get_rect(topleft = (WIDTH/2 - 25, 0)) 
+
+        pygame.draw.rect(self.display_surface, (UI_BORDER_COLOR), text_rect)
+        self.display_surface.blit(text_surface, text_rect)
+
+    def display(self, player, time):
         self.draw_bar(player.hp, player.max_hp, self.hp_bar_rect, UI_HP_COLOR)
         self.draw_bar(player.exp, player.lvlup_exp, self.exp_bar_rect, UI_EXP_COLOR)
 
         self.draw_exp_text(player.exp)
         self.draw_hp_text(player.hp)
+        self.draw_timer_text(time)

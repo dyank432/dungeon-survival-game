@@ -20,6 +20,15 @@ class Level:
 		# sprite setup
 		self.create_map()
 
+		# timer
+		self.counting_time = 0
+
+		self.font = pygame.font.Font(UI_FONT, UI_FONT_SIZE)
+		self.clock = pygame.time.Clock()
+		self.start_time = pygame.time.get_ticks()
+		self.paused  = False
+		self.counting_time = 0
+
 		# ui
 		self.ui = UI()
 
@@ -42,10 +51,12 @@ class Level:
 
 	def run(self):
 		# update and draw the game
+		if not self.paused:
+			self.counting_time = pygame.time.get_ticks() - self.start_time
 		self.visible_sprites.custom_draw(self.player)
 		self.visible_sprites.update()
 		self.visible_sprites.enemy_update(self.player)
-		self.ui.display(self.player)
+		self.ui.display(self.player, self.counting_time)
 
 # Center the camera on the player
 class YSortCameraGroup(pygame.sprite.Group):
