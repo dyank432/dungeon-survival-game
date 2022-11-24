@@ -28,7 +28,7 @@ class Projectile(pygame.sprite.Sprite):
     def update(self):  
 
         # kill projectile when they reach the wall boundaries
-        if self.rect.left < TILESIZE or self.rect.right > WIDTH - TILESIZE + 20 or self.rect.top < TILESIZE - 45 or self.rect.bottom > 1280 - TILESIZE + 45:
+        if self.rect.left < TILESIZE or self.rect.right > WIDTH - TILESIZE + 20 or self.rect.top < TILESIZE*2 - 45 or self.rect.bottom > 1280 - TILESIZE + 45:
             self.kill()
 
         # aiming line

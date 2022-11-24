@@ -28,8 +28,8 @@ class Level:
 			for col_index, col in enumerate(row):
 				x = col_index * TILESIZE
 				y = row_index * TILESIZE
-				if col == 'x':
-					Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'wall')
+				if col == 'x' or col == 'l' or col == 'r' or col == 't' or col == 'b' or col == 'br' or col == 'bl' or col == 'tr' or col == 'tl':
+					Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'wall', col)
 				if col == 'p':
 					self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites, self.create_projectile)
 				# temp for enemy testing
