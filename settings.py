@@ -17,6 +17,9 @@ UI_BORDER_COLOR = '#111111'
 UI_HP_COLOR = (181, 4, 4) 
 UI_EXP_COLOR = (0, 161, 37) 
 
+BG_COLOR_SELECTED = '#EEEEEE'
+TEXT_COLOR_SELECTED = (0,170,0)
+
 # weapon data
 weapon_data = {
     'projectile': { 'cooldown': 100, 'damage': 5 }

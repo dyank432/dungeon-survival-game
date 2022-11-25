@@ -4,25 +4,31 @@ from entity import Entity
 from support import import_folder
 
 class Enemy(Entity):
-    def __init__(self, name, pos, groups, obstacle_sprites):
+    def __init__(self, name, pos, groups, obstacle_sprites, damage_player, add_xp):
         super().__init__(groups)
 
         self.sprite_type = 'enemy'
         picture = pygame.image.load('./assets/enemies/ghost_0.png').convert_alpha()
         self.image = picture = pygame.transform.scale(picture, (64, 64))
-
+        
         self.rect = self.image.get_rect(topleft = pos)
-        self.hitbox = self.rect.inflate(0,-10)
+        self.hitbox = self.rect.inflate(0,-5)
         self.obstacle_sprites = obstacle_sprites
 
         self.animation_speed = 0.040
         self.health = 15
+        self.damage = 20
+        self.xp = 10
         self.import_enemy_assets()
 
         # invincibility frames
         self.vulnerable = True
         self.hit_time = 0
-        self.invincibility_duration = 300
+        self.invincibility_duration = 400
+
+        # player
+        self.damage_player = damage_player
+        self.add_xp = add_xp
 
     def import_enemy_assets(self):
         player_path = './assets/enemies/'
@@ -58,14 +64,15 @@ class Enemy(Entity):
         if self.vulnerable:
             if attack_type == 'weapon':
                 self.health -= player.get_total_damage()
-                # picture = pygame.image.load('./assets/enemies/damaged/ghost_damaged_0.png').convert_alpha()
-                # self.image = picture = pygame.transform.scale(picture, (64, 64))
+                picture = pygame.image.load('./assets/enemies/damaged/ghost_damaged_0.png').convert_alpha()
+                self.image = picture = pygame.transform.scale(picture, (64, 64))
             self.hit_time = pygame.time.get_ticks()
             self.vulnerable = False
 
     def check_death(self):
         if self.health <= 0:
             self.kill()
+            self.add_xp(self.xp)
 
     def cooldown(self):
         current_time = pygame.time.get_ticks()
@@ -83,6 +90,12 @@ class Enemy(Entity):
 
         # set image to current frame
         self.image = animation[int(self.frame)]
+
+        # if not self.vulnerable:
+        #     alpha = self.wave_value()
+        #     self.image.set_alpha(alpha)
+        # else:
+        #     self.image.set_alpha(255)
 
     def update(self):
         self.move(self.speed)

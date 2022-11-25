@@ -37,9 +37,14 @@ class Player(Entity):
 
         self.damage = 5
         
-        # projectiles (experimental)
+        # projectiles
         self.projectiles = []
         self.create_projectile = create_projectile
+
+        # damage timer
+        self.vulnerable = True
+        self.hit_time = None
+        self.invulnerability_duration = 500
 
     def import_player_assets(self):
         player_path = './assets/player/'
@@ -96,6 +101,10 @@ class Player(Entity):
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.attacking = False
 
+        if not self.vulnerable:
+            if current_time - self.hit_time >= self.invulnerability_duration:
+                self.vulnerable = True
+
     def animate(self):
         animation = self.animations[self.status]
 
@@ -106,6 +115,12 @@ class Player(Entity):
 
         # set image to current frame
         self.image = animation[int(self.frame)]
+
+        if not self.vulnerable:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
 
     def get_total_damage(self):
         base_dmg = self.damage
