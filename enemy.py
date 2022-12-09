@@ -64,8 +64,8 @@ class Enemy(Entity):
         if self.vulnerable:
             if attack_type == 'weapon':
                 self.health -= player.get_total_damage()
-                picture = pygame.image.load('./assets/enemies/damaged/ghost_damaged_0.png').convert_alpha()
-                self.image = picture = pygame.transform.scale(picture, (64, 64))
+                # picture = pygame.image.load('./assets/enemies/damaged/ghost_damaged_0.png').convert_alpha()
+                # self.image = picture = pygame.transform.scale(picture, (64, 64))
             self.hit_time = pygame.time.get_ticks()
             self.vulnerable = False
 
@@ -91,11 +91,11 @@ class Enemy(Entity):
         # set image to current frame
         self.image = animation[int(self.frame)]
 
-        # if not self.vulnerable:
-        #     alpha = self.wave_value()
-        #     self.image.set_alpha(alpha)
-        # else:
-        #     self.image.set_alpha(255)
+        if not self.vulnerable:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
 
     def update(self):
         self.move(self.speed)
