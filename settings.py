@@ -1,3 +1,22 @@
+import pygame
+
+pygame.init()
+pygame.mixer.pre_init(44100, -16, 2, 512)
+
+PLAYER_HIT_SOUND = pygame.mixer.Sound("./assets/sounds/player_hit.ogg")
+ENEMY_HIT_SOUND = pygame.mixer.Sound("./assets/sounds/enemy_hit.ogg")
+THROW_SOUND = pygame.mixer.Sound("./assets/sounds/throw.ogg")
+STEP_SOUND = pygame.mixer.Sound("./assets/sounds/throw.ogg")
+
+BG_MUSIC = "./assets/sounds/bg_music.ogg"
+
+# volume
+pygame.mixer.music.set_volume(0.05)
+PLAYER_HIT_SOUND.set_volume(0.15)
+ENEMY_HIT_SOUND.set_volume(0.05)
+THROW_SOUND.set_volume(0.06)
+STEP_SOUND.set_volume(0.06)
+
 # game setup
 WIDTH    = 1280 
 HEIGHT   = 720
@@ -31,8 +50,10 @@ item_data = [
     { 'name': 'SHARPENED DAGGERS',  'modifier': 2, 'description': "Increases weapon damage.", 'value': 0, 'max_value': 10, 'image': 'dagger'},
     { 'name': 'REINFORCED SHIELD',  'modifier': 1, 'description': "Reduces damage taken.", 'value': 0, 'max_value': 10, 'image': 'shield'},
     { 'name': 'DURABLE BELT', 'modifier': 20, 'description': "Increase maximum health.", 'value': 0, 'max_value': 10, 'image': 'belt'},
-    { 'name': 'DEXTEROUS GLOVES', 'modifier': 15, 'description': "Increases attack speed.", 'value': 0, 'max_value': 10, 'image': 'gloves'},
-    { 'name': 'HEALTH POTION', 'modifier': 1000, 'description': "fully restores your health.", 'value': 0, 'max_value': 10, 'image': 'potion'}
+    { 'name': 'DEXTEROUS GLOVES', 'modifier': 20, 'description': "Increases attack speed.", 'value': 0, 'max_value': 10, 'image': 'gloves'},
+    { 'name': 'HEALTH POTION', 'modifier': 1000, 'description': "fully restores your health.", 'value': 0, 'max_value': 10, 'image': 'potion'},
+    { 'name': 'SNIPER CROSSBOW', 'modifier': 75, 'description': "Increases attack range.", 'value': 0, 'max_value': 10, 'image': 'crossbow'},
+    { 'name': 'QUICKDRAW BACKPACK', 'modifier': 0.25, 'description': "Increases projectile speed.", 'value': 0, 'max_value': 10, 'image': 'backpack'}
 ]
 
 # enemy data

@@ -8,7 +8,6 @@ class UI:
         self.font = pygame.font.Font(UI_FONT, UI_FONT_SIZE)
         self.timerFont = pygame.font.Font(UI_FONT, 24)
 
-
         # bars
         self.hp_bar_rect = pygame.Rect(10, 10, BAR_WIDTH, BAR_HEIGHT)
         self.exp_bar_rect = pygame.Rect(10, 40, BAR_WIDTH, BAR_HEIGHT)

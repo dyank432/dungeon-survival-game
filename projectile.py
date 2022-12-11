@@ -10,7 +10,7 @@ class Projectile(pygame.sprite.Sprite):
 
         self.sprite_type = 'weapon'
 
-        self.speed = 6
+        self.speed = player.projectile_speed
         self.mx = (pygame.mouse.get_pos()[0] - WIDTH / 2)  
         self.my = -(pygame.mouse.get_pos()[1] - HEIGHT /2)
         self.angle = (math.atan2(self.my, self.mx))
@@ -23,11 +23,16 @@ class Projectile(pygame.sprite.Sprite):
 
         self.rect.x = player.rect.centerx - 24
         self.rect.y = player.rect.centery - 24
+        self.projectile_lifetime = player.range
+        self.spawn_time = pygame.time.get_ticks()
 
         self.dx = math.cos(self.angle) * self.speed
         self.dy = -(math.sin(self.angle) * self.speed)
 
     def update(self):  
+
+        if pygame.time.get_ticks() - self.spawn_time > self.projectile_lifetime:
+            self.kill()
 
         # kill projectile when they reach the wall boundaries
         if self.rect.left < TILESIZE or self.rect.right > WIDTH - TILESIZE + 20 or self.rect.top < TILESIZE*2 - 45 or self.rect.bottom > 1280 - TILESIZE + 45:

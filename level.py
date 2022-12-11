@@ -36,8 +36,11 @@ class Level:
 		self.start_time = pygame.time.get_ticks()
 		self.counting_time = 0
 
+		# difficulty
+		self.spawn_count = 3
+
 		# spawn cooldowns
-		self.spawn_cooldown_timer = 100
+		self.spawn_cooldown_timer = 1500
 		self.spawn_start = pygame.time.get_ticks()
 
 		# ui
@@ -69,6 +72,7 @@ class Level:
 						if collision.sprite_type == 'enemy':
 							collision.get_damage(self.player, attack_sprite.sprite_type)
 
+
 	def detect_player_collision(self):
 		for enemy in self.enemy_sprites:
 			collided_sprites = pygame.sprite.spritecollide(enemy, self.player_sprites, False)
@@ -79,7 +83,8 @@ class Level:
 		if self.player.vulnerable:
 			if self.player.hp >= 0:
 				if amt - self.player.armour > 0:
-					self.player.hp -= amt - self.player.armour 
+					self.player.hp -= amt - self.player.armour
+					pygame.mixer.Sound.play(PLAYER_HIT_SOUND) 
 			self.player.vulnerable = False
 			self.player.hit_time = pygame.time.get_ticks()
 
@@ -100,9 +105,15 @@ class Level:
 		player_y = player_pos[1]
 		# print(player_x, player_y)
 
-		if not x_coord in range(player_x - 120, player_x + 120) and not y_coord in range(player_y - 120, player_y + 120):
+		if not x_coord in range(player_x - 135, player_x + 135) and not y_coord in range(player_y - 135, player_y + 135):
 			Enemy('ghost', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 
+	def difficulty_increase(self):
+		self.spawn_count += 1
+		# for enemy in self.enemy_sprites:
+		# 	enemy.enemy_increase_stats()
+
+		# Enemy.enemy_increase_stats()	
 
 	def run(self):
 		# update and draw the game
@@ -122,7 +133,8 @@ class Level:
 
 			time_since_last_spawn = pygame.time.get_ticks()
 			if time_since_last_spawn - self.spawn_start >= self.spawn_cooldown_timer:
-				self.spawn_enemies()
+				for i in range(self.spawn_count): 
+					self.spawn_enemies()
 				self.spawn_start = pygame.time.get_ticks()
 
 

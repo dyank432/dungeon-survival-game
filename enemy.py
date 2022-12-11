@@ -64,6 +64,7 @@ class Enemy(Entity):
         if self.vulnerable:
             if attack_type == 'weapon':
                 self.health -= player.get_total_damage()
+                pygame.mixer.Sound.play(ENEMY_HIT_SOUND) 
                 # picture = pygame.image.load('./assets/enemies/damaged/ghost_damaged_0.png').convert_alpha()
                 # self.image = picture = pygame.transform.scale(picture, (64, 64))
             self.hit_time = pygame.time.get_ticks()
@@ -105,3 +106,9 @@ class Enemy(Entity):
         self.animate()
         self.cooldown()
         self.check_death()
+
+    def enemy_increase_stats(self):
+        self.health = self.health + 2
+        self.damage = self.damage + 2
+        self.speed = self.speed + 0.5
+        print(self.health, self.damage, self.speed)

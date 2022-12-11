@@ -71,16 +71,22 @@ class Upgrade:
             self.player.max_hp += item_data[3]['modifier']            
             self.player.hp += item_data[3]['modifier']
             print(f'curr max hp: {self.player.max_hp}')
-        if self.item_list[self.selection_index].name == 'DEXTEROUS GLOVES' and self.player.damage <= 100:
+        if self.item_list[self.selection_index].name == 'DEXTEROUS GLOVES' and self.player.attack_cooldown >= 100:
             self.player.attack_cooldown -= item_data[4]['modifier']
             print(f'curr attack_speed: {self.player.attack_cooldown}')
         if self.item_list[self.selection_index].name == 'HEALTH POTION':
             self.player.hp = self.player.max_hp
+        if self.item_list[self.selection_index].name == 'SNIPER CROSSBOW' and self.player.range <= 2500:
+            self.player.range += item_data[6]['modifier']
+            print(f'curr range: {self.player.range}')
+        if self.item_list[self.selection_index].name == 'QUICKDRAW BACKPACK' and self.player.projectile_speed <= 10:
+            self.player.projectile_speed += item_data[7]['modifier']
+            print(f'curr projectile_speed: {self.player.projectile_speed}')
 
     def selection_cooldown(self):
         if not self.can_move:
             current_time = pygame.time.get_ticks()
-            if current_time - self.selection_time >= 225:
+            if current_time - self.selection_time >= 265:
                 self.can_move = True
 
     def create_items(self):
