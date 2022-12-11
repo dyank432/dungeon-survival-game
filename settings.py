@@ -27,11 +27,11 @@ weapon_data = {
 }
 
 item_data = [
-    { 'name': 'BOOTS OF SPEED', 'modifier': 1, 'description': "Increase base movement speed.", 'value': 0, 'max_value': 10, 'image': 'boots'},
-    { 'name': 'SHARPENED DAGGERS',  'modifier': 1, 'description': "Increases weapon damage.", 'value': 0, 'max_value': 10, 'image': 'dagger'},
+    { 'name': 'BOOTS OF SPEED', 'modifier': 1.025, 'description': "Increase base movement speed.", 'value': 0, 'max_value': 10, 'image': 'boots'},
+    { 'name': 'SHARPENED DAGGERS',  'modifier': 2, 'description': "Increases weapon damage.", 'value': 0, 'max_value': 10, 'image': 'dagger'},
     { 'name': 'REINFORCED SHIELD',  'modifier': 1, 'description': "Reduces damage taken.", 'value': 0, 'max_value': 10, 'image': 'shield'},
-    { 'name': 'DURABLE BELT', 'modifier': 1, 'description': "Increase maximum health.", 'value': 0, 'max_value': 10, 'image': 'belt'},
-    { 'name': 'DEXTEROUS GLOVES', 'modifier': 1, 'description': "Increases attack speed.", 'value': 0, 'max_value': 10, 'image': 'gloves'},
+    { 'name': 'DURABLE BELT', 'modifier': 20, 'description': "Increase maximum health.", 'value': 0, 'max_value': 10, 'image': 'belt'},
+    { 'name': 'DEXTEROUS GLOVES', 'modifier': 15, 'description': "Increases attack speed.", 'value': 0, 'max_value': 10, 'image': 'gloves'},
     { 'name': 'HEALTH POTION', 'modifier': 1000, 'description': "fully restores your health.", 'value': 0, 'max_value': 10, 'image': 'potion'}
 ]
 

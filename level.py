@@ -1,3 +1,4 @@
+import random
 import pygame
 from projectile import Projectile 
 from settings import *
@@ -30,12 +31,14 @@ class Level:
 		self.create_map()
 
 		# timer
-		self.counting_time = 0
-
 		self.font = pygame.font.Font(UI_FONT, UI_FONT_SIZE)
 		self.clock = pygame.time.Clock()
 		self.start_time = pygame.time.get_ticks()
 		self.counting_time = 0
+
+		# spawn cooldowns
+		self.spawn_cooldown_timer = 100
+		self.spawn_start = pygame.time.get_ticks()
 
 		# ui
 		self.ui = UI()
@@ -75,7 +78,8 @@ class Level:
 	def damage_player(self, amt):
 		if self.player.vulnerable:
 			if self.player.hp >= 0:
-				self.player.hp -= amt
+				if amt - self.player.armour > 0:
+					self.player.hp -= amt - self.player.armour 
 			self.player.vulnerable = False
 			self.player.hit_time = pygame.time.get_ticks()
 
@@ -85,20 +89,42 @@ class Level:
 	def toggle_menu(self):
 		self.game_paused = not self.game_paused
 
+	def spawn_enemies(self):
+		# Generate random X-coordinate within the play field
+		x_coord = random.randrange(TILESIZE, WIDTH - TILESIZE - 70)
+		# Generate random X-coordinate within the play field
+		y_coord = random.randrange(TILESIZE*2, 1280 - TILESIZE - 70)
+		
+		player_pos = self.player.rect
+		player_x = player_pos[0]
+		player_y = player_pos[1]
+		# print(player_x, player_y)
+
+		if not x_coord in range(player_x - 120, player_x + 120) and not y_coord in range(player_y - 120, player_y + 120):
+			Enemy('ghost', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
+
+
 	def run(self):
 		# update and draw the game
+		self.counting_time = pygame.time.get_ticks() - self.start_time
 		self.visible_sprites.custom_draw(self.player)
 		self.ui.display(self.player, self.counting_time)
 
-		if self.game_paused:
+		# if self.game_paused:
+		if self.player.exp >= self.player.lvlup_exp:
 			self.upgrade.display()
 		# if not self.paused
 		else:
-			self.counting_time = pygame.time.get_ticks() - self.start_time
 			self.visible_sprites.update()
 			self.visible_sprites.enemy_update(self.player)
 			self.player_attack_logic()
 			self.detect_player_collision()
+
+			time_since_last_spawn = pygame.time.get_ticks()
+			if time_since_last_spawn - self.spawn_start >= self.spawn_cooldown_timer:
+				self.spawn_enemies()
+				self.spawn_start = pygame.time.get_ticks()
+
 
 # Center the camera on the player
 class YSortCameraGroup(pygame.sprite.Group):

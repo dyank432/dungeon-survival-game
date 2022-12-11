@@ -91,11 +91,11 @@ class Enemy(Entity):
         # set image to current frame
         self.image = animation[int(self.frame)]
 
-        if not self.vulnerable:
-            alpha = self.wave_value()
-            self.image.set_alpha(alpha)
-        else:
-            self.image.set_alpha(255)
+        # if not self.vulnerable:
+        #     alpha = self.wave_value()
+        #     self.image.set_alpha(alpha)
+        # else:
+        #     self.image.set_alpha(255)
 
     def update(self):
         self.move(self.speed)

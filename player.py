@@ -32,6 +32,8 @@ class Player(Entity):
         self.max_hp = 100
         self.hp = 100
 
+        self.armour = 0
+
         self.lvlup_exp = 100
         self.exp = 10 # to visualize (should start at 0)
 

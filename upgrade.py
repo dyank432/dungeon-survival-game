@@ -52,8 +52,31 @@ class Upgrade:
                 self.can_move = False
                 self.selection_time = pygame.time.get_ticks()
                 self.generated_items = False
+                self.apply_item_upgrade()
+                self.player.exp = 0
+                self.player.lvlup_exp *= 1.10
                 # print(self.selection_index)
-    
+
+    def apply_item_upgrade(self):
+        if self.item_list[self.selection_index].name == 'BOOTS OF SPEED' and self.player.speed <= 10:
+            self.player.speed *= item_data[0]['modifier']
+            print(f'curr speed: {self.player.speed}')
+        if self.item_list[self.selection_index].name == 'SHARPENED DAGGERS' and self.player.damage <= 25:
+            self.player.damage += item_data[1]['modifier']
+            print(f'curr damage: {self.player.damage}')
+        if self.item_list[self.selection_index].name == 'REINFORCED SHIELD' and self.player.armour <= 25:
+            self.player.armour += item_data[2]['modifier']
+            print(f'curr armour: {self.player.armour}')
+        if self.item_list[self.selection_index].name == 'DURABLE BELT' and self.player.damage <= 500:
+            self.player.max_hp += item_data[3]['modifier']            
+            self.player.hp += item_data[3]['modifier']
+            print(f'curr max hp: {self.player.max_hp}')
+        if self.item_list[self.selection_index].name == 'DEXTEROUS GLOVES' and self.player.damage <= 100:
+            self.player.attack_cooldown -= item_data[4]['modifier']
+            print(f'curr attack_speed: {self.player.attack_cooldown}')
+        if self.item_list[self.selection_index].name == 'HEALTH POTION':
+            self.player.hp = self.player.max_hp
+
     def selection_cooldown(self):
         if not self.can_move:
             current_time = pygame.time.get_ticks()
@@ -112,10 +135,12 @@ class Item:
         self.rect = pygame.Rect(l,t,w,h)
         self.index = index
         self.font = font
-    
+        self.name = ''
+
     def display_items(self, surface, name, desc, image, selected):
         color = TEXT_COLOR_SELECTED if selected else TEXT_COLOR
 
+        self.name = name
         # name
         name_surf = self.font.render(name, False, color)
         name_rect = name_surf.get_rect(midtop = self.rect.midtop + pygame.math.Vector2(0,35))
@@ -141,7 +166,6 @@ class Item:
             select_surf = self.font.render("SELECT", False, color)
             select_rect = select_surf.get_rect(midbottom = self.rect.midbottom - pygame.math.Vector2(0,20))
             surface.blit(select_surf, select_rect)
-
 
     def display(self, surface, selection_num, item):
         if self.index == selection_num:
