@@ -31,13 +31,14 @@ class Player(Entity):
         #stats
         self.max_hp = 100
         self.hp = 100
-
         self.armour = 0
+        self.damage = 5
+        self.range = 700
+        self.projectile_speed = 6
 
         self.lvlup_exp = 100
         self.exp = 10 # to visualize (should start at 0)
 
-        self.damage = 5
         
         # projectiles
         self.projectiles = []
@@ -91,6 +92,7 @@ class Player(Entity):
         if not self.attacking:
             self.attacking = True
             self.create_projectile()
+            pygame.mixer.Sound.play(THROW_SOUND)
             self.attack_time = pygame.time.get_ticks()
 
     def get_status(self):
