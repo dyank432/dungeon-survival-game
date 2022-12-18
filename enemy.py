@@ -47,7 +47,7 @@ class Enemy(Entity):
             self.health = 26
             self.damage = 25
             self.xp = 25
-            self.speed = 3.5
+            self.speed = 3.25
         self.import_enemy_assets()
 
         # invincibility frames
