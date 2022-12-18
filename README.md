@@ -1,6 +1,6 @@
 # Dungeon Survival Game
 
-# Controls + Instructions:
+## Controls + Instructions:
 
 - Instructions:
     - Run the game from "main.py" file.
@@ -11,7 +11,7 @@
   - Mute/Unmute Music: M.
   - Select Upgrades: movement keys + space/enter to select.
   
-  # Game Vision
+  ## Game Vision
   
   **Title**: 
     - Dungeon Survival
@@ -34,7 +34,7 @@
     - Mechanics:
        - You lose health points when monsters touch your character, when your health reaches 0 it is game over.
        - You gain experience when your character kills monsters and gain upgrades each level.
-       - Upon level upon you get to pick between 3 out 8 possible unique items that improve your characters base stats in some way.
+       - Upon level upon you get to pick between 3 out of 8 possible unique items that improve your characters base stats in some way.
        - There are 5 enemies in total, a new type of enemy appears every minute. New enemies will have higher stats than the last type of enemy.
        
     - Uniqueness:
