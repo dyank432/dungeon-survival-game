@@ -44,10 +44,10 @@ class Enemy(Entity):
             self.xp = 20
             self.speed = 3.25
         if self.name == 'cultist':
-            self.health = 26
+            self.health = 25
             self.damage = 25
             self.xp = 25
-            self.speed = 3.25
+            self.speed = 3.5
         self.import_enemy_assets()
 
         # invincibility frames
