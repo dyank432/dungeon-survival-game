@@ -5,8 +5,11 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 
 PLAYER_HIT_SOUND = pygame.mixer.Sound("./assets/sounds/player_hit.ogg")
 ENEMY_HIT_SOUND = pygame.mixer.Sound("./assets/sounds/enemy_hit.ogg")
+PLAYER_DEATH_SOUND = pygame.mixer.Sound("./assets/sounds/player_death.ogg")
+ENEMY_DEATH_SOUND = pygame.mixer.Sound("./assets/sounds/enemy_death.ogg")
 THROW_SOUND = pygame.mixer.Sound("./assets/sounds/throw.ogg")
-STEP_SOUND = pygame.mixer.Sound("./assets/sounds/throw.ogg")
+SELECT_SOUND = pygame.mixer.Sound("./assets/sounds/select.ogg")
+SWITCH_SOUND = pygame.mixer.Sound("./assets/sounds/switch.ogg")
 
 BG_MUSIC = "./assets/sounds/bg_music.ogg"
 
@@ -14,8 +17,11 @@ BG_MUSIC = "./assets/sounds/bg_music.ogg"
 pygame.mixer.music.set_volume(0.05)
 PLAYER_HIT_SOUND.set_volume(0.15)
 ENEMY_HIT_SOUND.set_volume(0.05)
+PLAYER_DEATH_SOUND.set_volume(0.13)
+ENEMY_DEATH_SOUND.set_volume(0.03)
 THROW_SOUND.set_volume(0.06)
-STEP_SOUND.set_volume(0.06)
+SELECT_SOUND.set_volume(0.08)
+SWITCH_SOUND.set_volume(0.10)
 
 # game setup
 WIDTH    = 1280 

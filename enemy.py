@@ -32,11 +32,16 @@ class Enemy(Entity):
             self.xp = 10
             self.speed = 2.75
 
+        if self.name == 'spider':
+            self.health = 15
+            self.damage = 15
+            self.xp = 15
+            self.speed = 3
 
         if self.name == 'ghost':
-            self.health = 15
+            self.health = 17
             self.damage = 20
-            self.xp = 15
+            self.xp = 20
             self.speed = 3.25
 
         self.import_enemy_assets()
@@ -89,6 +94,7 @@ class Enemy(Entity):
 
     def check_death(self):
         if self.health <= 0:
+            pygame.mixer.Sound.play(ENEMY_DEATH_SOUND) 
             self.kill()
             self.add_xp(self.xp)
 

@@ -43,8 +43,9 @@ class Level:
 		self.spawn_cooldown_timer = 1500
 		self.spawn_start = pygame.time.get_ticks()
 
-		# boolean for game over
+		# game over variables
 		self.lost = False
+		self.death_sound_played = False	
 
 		# ui
 		self.ui = UI()
@@ -114,7 +115,9 @@ class Level:
 				Enemy('rat', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 			if self.counting_time >= 60000 and self.counting_time <= 120000:
 				Enemy('bat', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
-			if self.counting_time >= 120000:
+			if self.counting_time >= 120000 and self.counting_time <= 180000:
+				Enemy('spider', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
+			if self.counting_time >= 180000:
 				Enemy('ghost', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 
 	def difficulty_increase(self):
@@ -134,6 +137,11 @@ class Level:
 		text_rect_2 = text_surface_2.get_rect(topleft = ( WIDTH/2 - text_surface_2.get_width()/2, HEIGHT/2 - 50 )) 
 
 		if self.player.hp <= 0:
+
+			if not self.death_sound_played:
+				pygame.mixer.Sound.play(PLAYER_DEATH_SOUND)
+				self.death_sound_played = True	
+
 			self.display_surface.blit(text_surface, text_rect)
 			self.display_surface.blit(text_surface_2, text_rect_2)
 

@@ -35,18 +35,22 @@ class Upgrade:
                 self.selection_index += 1
                 self.can_move = False 
                 self.selection_time = pygame.time.get_ticks()
+                pygame.mixer.Sound.play(SWITCH_SOUND)
                 # print(self.selection_index)
 
             elif (keys[pygame.K_LEFT]  or keys[pygame.K_a]) and self.selection_index >= 1:
                 self.selection_index -= 1
                 self.can_move = False
                 self.selection_time = pygame.time.get_ticks()
+                pygame.mixer.Sound.play(SWITCH_SOUND)
+
                 # print(self.selection_index)
 
             if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.can_move = False
                 self.selection_time = pygame.time.get_ticks()
                 self.generated_items = False
+                pygame.mixer.Sound.play(SELECT_SOUND)
                 self.apply_item_upgrade()
                 self.player.exp = 0
                 self.player.lvlup_exp *= 1.10
