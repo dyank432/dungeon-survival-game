@@ -8,14 +8,14 @@ class Enemy(Entity):
         super().__init__(groups)
 
         self.sprite_type = 'enemy'
-        picture = pygame.image.load('./assets/enemies/ghost_0.png').convert_alpha()
-        self.image = picture = pygame.transform.scale(picture, (64, 64))
+        self.picture = pygame.image.load('./assets/enemies/ghost_0.png').convert_alpha()
+        self.image = pygame.transform.scale(self.picture, (64, 64))
         
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-5)
         self.obstacle_sprites = obstacle_sprites
 
-        self.animation_speed = 0.040
+        self.animation_speed = 0.085
         self.health = 15
         self.damage = 20
         self.xp = 10
@@ -33,7 +33,8 @@ class Enemy(Entity):
     def import_enemy_assets(self):
         player_path = './assets/enemies/'
         self.animations = {
-            'walk': []
+            'walk': [],
+            'damaged': []
         }
 
         for animation in self.animations.keys():
@@ -82,21 +83,23 @@ class Enemy(Entity):
                 self.vulnerable = True
 
     def animate(self):
-        animation = self.animations['walk']
+        animation = self.animations['damaged']
 
-        # loop through the animation
-        self.frame += self.animation_speed
-        if self.frame >= len(animation):
+        if not self.vulnerable:
+            animation = self.animations['damaged']
+            self.frame += self.animation_speed
+
+            if self.frame >= len(animation):
+                self.image = pygame.transform.scale(self.picture, (64, 64))
+                self.frame = 0
+
+            self.image = animation[int(self.frame)]
+
+        else:
+            animation = self.animations['walk'] 
+            self.image = pygame.transform.scale(self.picture, (64, 64))
             self.frame = 0
 
-        # set image to current frame
-        self.image = animation[int(self.frame)]
-
-        # if not self.vulnerable:
-        #     alpha = self.wave_value()
-        #     self.image.set_alpha(alpha)
-        # else:
-        #     self.image.set_alpha(255)
 
     def update(self):
         self.move(self.speed)

@@ -31,24 +31,19 @@ class Upgrade:
         keys = pygame.key.get_pressed()
 
         if self.can_move:
-            if keys[pygame.K_RIGHT] and self.selection_index < self.attribute_nr - 1:
+            if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and self.selection_index < self.attribute_nr - 1:
                 self.selection_index += 1
                 self.can_move = False 
                 self.selection_time = pygame.time.get_ticks()
                 # print(self.selection_index)
 
-            elif keys[pygame.K_LEFT] and self.selection_index >= 1:
+            elif (keys[pygame.K_LEFT]  or keys[pygame.K_a]) and self.selection_index >= 1:
                 self.selection_index -= 1
                 self.can_move = False
                 self.selection_time = pygame.time.get_ticks()
                 # print(self.selection_index)
 
-            if keys[pygame.K_SPACE]:
-                self.can_move = False
-                self.selection_time = pygame.time.get_ticks()
-                # print(self.selection_index)
-
-            if keys[pygame.K_RETURN]:
+            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.can_move = False
                 self.selection_time = pygame.time.get_ticks()
                 self.generated_items = False
@@ -120,7 +115,7 @@ class Upgrade:
 
         color = TEXT_COLOR
         # title
-        title_surf = self.title_font.render("Select an upgrade (use ARROW KEYS + ENTER to select)", False, color)
+        title_surf = self.title_font.render("Select an upgrade (use MOVEMENT KEYS + ENTER/SPACE to select)", False, color)
         title_rect = title_surf.get_rect(topleft = (WIDTH/2 - title_surf.get_width() // 2, 100))  #+ pygame.math.Vector2(0,0))
 
         pygame.draw.rect(self.display_surface, (0, 0, 0), title_rect)

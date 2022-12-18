@@ -20,14 +20,18 @@ class Game:
         pygame.mixer.music.play(-1)
 
         while True:
+
+            self.screen.fill((97, 48, 0))
+            self.level.run()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
 
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        self.level.toggle_menu()
+                # if event.type == pygame.KEYDOWN:
+                #     if event.key == pygame.K_SPACE:
+                #         self.level.toggle_menu()
                 if event.type == self.difficulty_increase:
                     self.level.difficulty_increase()
 
@@ -40,8 +44,11 @@ class Game:
                             pygame.mixer.music.unpause()
                             music_playing = True
 
-            self.screen.fill((97, 48, 0))
-            self.level.run()
+                    if self.level.lost == True:
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_SPACE:
+                                self.level = Level()
+
             pygame.display.update()
             self.clock.tick(FPS)
  

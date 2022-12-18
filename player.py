@@ -65,20 +65,20 @@ class Player(Entity):
         keys = pygame.key.get_pressed()
 
         # movement
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.direction.y = -1
             self.status = 'walk'
-        elif keys[pygame.K_DOWN]:
+        elif keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.direction.y = 1
             self.status = 'walk'
         else:
             self.direction.y = 0
             self.status = 'idle'
 
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.direction.x = -1
             self.status = 'walk'
-        elif keys[pygame.K_RIGHT]:
+        elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.direction.x = 1
             self.status = 'walk'
         else:

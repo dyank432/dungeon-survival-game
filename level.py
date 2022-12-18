@@ -43,6 +43,9 @@ class Level:
 		self.spawn_cooldown_timer = 1500
 		self.spawn_start = pygame.time.get_ticks()
 
+		# boolean for game over
+		self.lost = False
+
 		# ui
 		self.ui = UI()
 		self.upgrade = Upgrade(self.player)
@@ -114,12 +117,30 @@ class Level:
 		# 	enemy.enemy_increase_stats()
 
 		# Enemy.enemy_increase_stats()	
+	
+	def check_loss(self):
+		loss_font = pygame.font.Font(UI_FONT, 32)
+
+		text_surface = loss_font.render("GAME OVER, YOU DIED.", False, (200,0,0))
+		text_rect = text_surface.get_rect(topleft = ( WIDTH/2 - text_surface.get_width()/2, HEIGHT/2 - 150 )) 
+
+		text_surface_2 = loss_font.render("Press SPACE to restart", False, (200,0,0))
+		text_rect_2 = text_surface_2.get_rect(topleft = ( WIDTH/2 - text_surface_2.get_width()/2, HEIGHT/2 - 50 )) 
+
+		if self.player.hp <= 0:
+			self.display_surface.blit(text_surface, text_rect)
+			self.display_surface.blit(text_surface_2, text_rect_2)
+
+			self.player.kill()
+			self.lost = True
 
 	def run(self):
 		# update and draw the game
 		self.counting_time = pygame.time.get_ticks() - self.start_time
 		self.visible_sprites.custom_draw(self.player)
 		self.ui.display(self.player, self.counting_time)
+
+		self.check_loss()
 
 		# if self.game_paused:
 		if self.player.exp >= self.player.lvlup_exp:
@@ -136,7 +157,6 @@ class Level:
 				for i in range(self.spawn_count): 
 					self.spawn_enemies()
 				self.spawn_start = pygame.time.get_ticks()
-
 
 # Center the camera on the player
 class YSortCameraGroup(pygame.sprite.Group):
