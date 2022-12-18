@@ -4,7 +4,6 @@ from projectile import Projectile
 from settings import *
 from tile import Tile
 from player import Player
-from debug import debug
 from ui import UI
 from enemy import Enemy
 from upgrade import Upgrade
@@ -108,7 +107,6 @@ class Level:
 		player_pos = self.player.rect
 		player_x = player_pos[0]
 		player_y = player_pos[1]
-		# print(player_x, player_y)
 
 		if not x_coord in range(player_x - 150, player_x + 150) and not y_coord in range(player_y - 150, player_y + 150):
 			if self.counting_time <= 60000:
@@ -121,6 +119,7 @@ class Level:
 				Enemy('ghost', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 			if self.counting_time >= 240000:
 				Enemy('cultist', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
+	
 	def difficulty_increase(self):
 		self.spawn_count += 1
 		# for enemy in self.enemy_sprites:
@@ -157,10 +156,8 @@ class Level:
 
 		self.check_loss()
 
-		# if self.game_paused:
 		if self.player.exp >= self.player.lvlup_exp:
 			self.upgrade.display()
-		# if not self.paused
 		else:
 			self.visible_sprites.update()
 			self.visible_sprites.enemy_update(self.player)

@@ -4,7 +4,6 @@ from settings import *
 class Tile(pygame.sprite.Sprite):
     def __init__(self, pos, groups, sprite_type, orientation):
         super().__init__(groups)
-        # self.image = pygame.image.load('./assets/wall_1.png')
         if orientation == 'x':
             loadPic = 'wall_1'
         if orientation == 't':

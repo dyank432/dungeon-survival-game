@@ -7,14 +7,12 @@ from entity import Entity
 class Player(Entity):
     def __init__(self, pos, groups, obstacle_sprites, create_projectile):
         super().__init__(groups)
-        # self.image = pygame.image.load('./assets/player_1.png').convert_alpha()
         picture = pygame.image.load('./assets/player/player_1.png').convert_alpha()
         self.image = pygame.transform.scale(picture, (64, 64))
 
         self.rect = self.image.get_rect(topleft = pos)
         self.hitbox = self.rect.inflate(0,-50)
 
-        # self.direction = pygame.math.Vector2()
         self.speed = 5
 
         self.attacking = False
@@ -24,9 +22,6 @@ class Player(Entity):
         self.obstacle_sprites = obstacle_sprites
 
         self.import_player_assets()
-        # self.status = 'idle'
-        # self.frame = 0
-        # self.animation_speed = 0.075
 
         #stats
         self.max_hp = 100
@@ -58,7 +53,6 @@ class Player(Entity):
         for animation in self.animations.keys():
             full_path = player_path + animation
             self.animations[animation] = import_folder(full_path)
-        # print(self.animations)
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -82,10 +76,6 @@ class Player(Entity):
             self.status = 'walk'
         else:
             self.direction.x = 0
-            # self.status = 'idle'
-
-        # if keys[pygame.K_SPACE]:
-        #     self.projectiles.append(projectile(self.rect.centerx, self.rect.centery, self.visible_sprites))
 
         # attack
         if not self.attacking:
@@ -93,10 +83,7 @@ class Player(Entity):
             self.create_projectile()
             pygame.mixer.Sound.play(THROW_SOUND)
             self.attack_time = pygame.time.get_ticks()
-
-    def get_status(self):
-        pass
-
+            
     def cooldowns(self):
         current_time = pygame.time.get_ticks()
 

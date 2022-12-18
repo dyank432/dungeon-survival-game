@@ -14,5 +14,3 @@ def import_folder(path):
             surface_list.append(image_surface)
 
     return surface_list
-
-# import_folder('./assets/player/walk')

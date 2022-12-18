@@ -29,9 +29,6 @@ class Game:
                     pygame.quit()
                     sys.exit()
 
-                # if event.type == pygame.KEYDOWN:
-                #     if event.key == pygame.K_SPACE:
-                #         self.level.toggle_menu()
                 if event.type == self.difficulty_increase:
                     self.level.difficulty_increase()
 

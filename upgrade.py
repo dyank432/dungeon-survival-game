@@ -8,7 +8,9 @@ class Upgrade:
         self.display_surface = pygame.display.get_surface()
         self.player = player
         
+        # number of upgrade choices
         self.attr = ['1','2','3']
+
         self.attribute_nr = len(self.attr)
         self.font = pygame.font.Font(UI_FONT, UI_FONT_SIZE)
         self.title_font = pygame.font.Font(UI_FONT, UI_TITLE_FONT_SIZE)
@@ -36,15 +38,12 @@ class Upgrade:
                 self.can_move = False 
                 self.selection_time = pygame.time.get_ticks()
                 pygame.mixer.Sound.play(SWITCH_SOUND)
-                # print(self.selection_index)
 
             elif (keys[pygame.K_LEFT]  or keys[pygame.K_a]) and self.selection_index >= 1:
                 self.selection_index -= 1
                 self.can_move = False
                 self.selection_time = pygame.time.get_ticks()
                 pygame.mixer.Sound.play(SWITCH_SOUND)
-
-                # print(self.selection_index)
 
             if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
                 self.can_move = False
@@ -54,33 +53,32 @@ class Upgrade:
                 self.apply_item_upgrade()
                 self.player.exp = 0
                 self.player.lvlup_exp *= 1.10
-                # print(self.selection_index)
 
     def apply_item_upgrade(self):
         if self.item_list[self.selection_index].name == 'BOOTS OF SPEED' and self.player.speed <= 10:
             self.player.speed += item_data[0]['modifier']
-            print(f'curr speed: {self.player.speed}')
+            # print(f'curr speed: {self.player.speed}')
         if self.item_list[self.selection_index].name == 'SHARPENED DAGGERS' and self.player.damage <= 25:
             self.player.damage += item_data[1]['modifier']
-            print(f'curr damage: {self.player.damage}')
+            # print(f'curr damage: {self.player.damage}')
         if self.item_list[self.selection_index].name == 'REINFORCED SHIELD' and self.player.armour <= 25:
             self.player.armour += item_data[2]['modifier']
-            print(f'curr armour: {self.player.armour}')
+            # print(f'curr armour: {self.player.armour}')
         if self.item_list[self.selection_index].name == 'DURABLE BELT' and self.player.damage <= 500:
             self.player.max_hp += item_data[3]['modifier']            
             self.player.hp += item_data[3]['modifier']
-            print(f'curr max hp: {self.player.max_hp}')
+            # print(f'curr max hp: {self.player.max_hp}')
         if self.item_list[self.selection_index].name == 'DEXTEROUS GLOVES' and self.player.attack_cooldown >= 100:
             self.player.attack_cooldown -= item_data[4]['modifier']
-            print(f'curr attack_speed: {self.player.attack_cooldown}')
+            # print(f'curr attack_speed: {self.player.attack_cooldown}')
         if self.item_list[self.selection_index].name == 'HEALTH POTION':
             self.player.hp = self.player.max_hp
         if self.item_list[self.selection_index].name == 'EXTENDED KNIFETHROWER' and self.player.range <= 2500:
             self.player.range += item_data[6]['modifier']
-            print(f'curr range: {self.player.range}')
+            # print(f'curr range: {self.player.range}')
         if self.item_list[self.selection_index].name == 'QUICKDRAW BACKPACK' and self.player.projectile_speed <= 10:
             self.player.projectile_speed += item_data[7]['modifier']
-            print(f'curr projectile_speed: {self.player.projectile_speed}')
+            # print(f'curr projectile_speed: {self.player.projectile_speed}')
 
     def selection_cooldown(self):
         if not self.can_move:
@@ -103,33 +101,22 @@ class Upgrade:
             self.item_list.append(item)
 
     def display(self):
-    #    self.display_surface.fill('black')
         self.input()
         self.selection_cooldown()
 
-        # for i in range(6):
-        #     print(item_data[i]['description'])
-
         if (not self.generated_items):
             self.item_selection_list = self.randomize_items()
-            # print(self.item_selection_list)
-
-            # print(item_data)
-            # print(item_data.keys())
 
         color = TEXT_COLOR
         # title
         title_surf = self.title_font.render("Select an upgrade (use MOVEMENT KEYS + ENTER/SPACE to select)", False, color)
-        title_rect = title_surf.get_rect(topleft = (WIDTH/2 - title_surf.get_width() // 2, 100))  #+ pygame.math.Vector2(0,0))
+        title_rect = title_surf.get_rect(topleft = (WIDTH/2 - title_surf.get_width() // 2, 100))
 
         pygame.draw.rect(self.display_surface, (0, 0, 0), title_rect)
         self.display_surface.blit(title_surf, (WIDTH/2 - title_surf.get_width() // 2, 100))
 
-
-        for item in self.item_list:
-            ### print(self.item_selection_list)
-            ### print(self.item_selection_list[item.index])
-            item.display(self.display_surface, self.selection_index, self.item_selection_list[item.index]) #item.index
+        for item in self.item_list:   
+            item.display(self.display_surface, self.selection_index, self.item_selection_list[item.index])
 
     def randomize_items(self):
         self.generated_items = True
@@ -181,4 +168,3 @@ class Item:
             pygame.draw.rect(surface, UI_BORDER_COLOR, self.rect, 4)
 
         self.display_items(surface, item['name'], item['description'], item['image'], self.index == selection_num)
-    
