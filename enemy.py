@@ -8,7 +8,9 @@ class Enemy(Entity):
         super().__init__(groups)
 
         self.sprite_type = 'enemy'
-        self.picture = pygame.image.load('./assets/enemies/ghost_0.png').convert_alpha()
+        self.name = name
+        
+        self.picture = pygame.image.load(f'./assets/enemies/{name}/{name}_0.png').convert_alpha()
         self.image = pygame.transform.scale(self.picture, (64, 64))
         
         self.rect = self.image.get_rect(topleft = pos)
@@ -16,9 +18,27 @@ class Enemy(Entity):
         self.obstacle_sprites = obstacle_sprites
 
         self.animation_speed = 0.085
-        self.health = 15
-        self.damage = 20
-        self.xp = 10
+
+        # stats
+        if self.name == 'rat':
+            self.health = 9
+            self.damage = 10
+            self.xp = 7.5
+            self.speed = 2.5
+
+        if self.name == 'bat':
+            self.health = 11
+            self.damage = 15
+            self.xp = 10
+            self.speed = 2.75
+
+
+        if self.name == 'ghost':
+            self.health = 15
+            self.damage = 20
+            self.xp = 15
+            self.speed = 3.25
+
         self.import_enemy_assets()
 
         # invincibility frames
@@ -31,19 +51,15 @@ class Enemy(Entity):
         self.add_xp = add_xp
 
     def import_enemy_assets(self):
-        player_path = './assets/enemies/'
+        enemy_path = f'./assets/enemies/{self.name}/'
         self.animations = {
             'walk': [],
             'damaged': []
         }
 
         for animation in self.animations.keys():
-            full_path = player_path + animation
+            full_path = enemy_path + animation
             self.animations[animation] = import_folder(full_path)
-
-        # stats
-        # todo: based on monster name
-        self.speed = 3
     
     def get_status(self, player):
         distance = self.get_player_position(player)[0]

@@ -59,9 +59,10 @@ class Level:
 					Tile((x,y),[self.visible_sprites,self.obstacle_sprites], 'wall', col)
 				if col == 'p':
 					self.player = Player((x,y), [self.visible_sprites, self.player_sprites], self.obstacle_sprites, self.create_projectile)
-				# temp for enemy testing
-				if col == 'e':
+				if col == 'g':
 					Enemy('ghost', (x,y), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
+				if col == 'B':
+					Enemy('bat', (x,y), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 
 	def create_projectile(self):
 		Projectile(self.player, [self.visible_sprites, self.attack_sprites] )
@@ -108,8 +109,13 @@ class Level:
 		player_y = player_pos[1]
 		# print(player_x, player_y)
 
-		if not x_coord in range(player_x - 135, player_x + 135) and not y_coord in range(player_y - 135, player_y + 135):
-			Enemy('ghost', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
+		if not x_coord in range(player_x - 150, player_x + 150) and not y_coord in range(player_y - 150, player_y + 150):
+			if self.counting_time <= 60000:
+				Enemy('rat', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
+			if self.counting_time >= 60000 and self.counting_time <= 120000:
+				Enemy('bat', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
+			if self.counting_time >= 120000:
+				Enemy('ghost', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 
 	def difficulty_increase(self):
 		self.spawn_count += 1

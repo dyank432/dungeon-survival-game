@@ -54,7 +54,7 @@ class Upgrade:
 
     def apply_item_upgrade(self):
         if self.item_list[self.selection_index].name == 'BOOTS OF SPEED' and self.player.speed <= 10:
-            self.player.speed *= item_data[0]['modifier']
+            self.player.speed += item_data[0]['modifier']
             print(f'curr speed: {self.player.speed}')
         if self.item_list[self.selection_index].name == 'SHARPENED DAGGERS' and self.player.damage <= 25:
             self.player.damage += item_data[1]['modifier']
@@ -71,7 +71,7 @@ class Upgrade:
             print(f'curr attack_speed: {self.player.attack_cooldown}')
         if self.item_list[self.selection_index].name == 'HEALTH POTION':
             self.player.hp = self.player.max_hp
-        if self.item_list[self.selection_index].name == 'SNIPER CROSSBOW' and self.player.range <= 2500:
+        if self.item_list[self.selection_index].name == 'EXTENDED KNIFETHROWER' and self.player.range <= 2500:
             self.player.range += item_data[6]['modifier']
             print(f'curr range: {self.player.range}')
         if self.item_list[self.selection_index].name == 'QUICKDRAW BACKPACK' and self.player.projectile_speed <= 10:

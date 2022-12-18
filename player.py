@@ -37,9 +37,8 @@ class Player(Entity):
         self.projectile_speed = 6
 
         self.lvlup_exp = 100
-        self.exp = 10 # to visualize (should start at 0)
+        self.exp = 0
 
-        
         # projectiles
         self.projectiles = []
         self.create_projectile = create_projectile

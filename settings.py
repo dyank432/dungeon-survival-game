@@ -46,13 +46,13 @@ weapon_data = {
 }
 
 item_data = [
-    { 'name': 'BOOTS OF SPEED', 'modifier': 1.025, 'description': "Increase base movement speed.", 'value': 0, 'max_value': 10, 'image': 'boots'},
+    { 'name': 'BOOTS OF SPEED', 'modifier': 0.25, 'description': "Increase base movement speed.", 'value': 0, 'max_value': 10, 'image': 'boots'},
     { 'name': 'SHARPENED DAGGERS',  'modifier': 2, 'description': "Increases weapon damage.", 'value': 0, 'max_value': 10, 'image': 'dagger'},
     { 'name': 'REINFORCED SHIELD',  'modifier': 1, 'description': "Reduces damage taken.", 'value': 0, 'max_value': 10, 'image': 'shield'},
     { 'name': 'DURABLE BELT', 'modifier': 20, 'description': "Increase maximum health.", 'value': 0, 'max_value': 10, 'image': 'belt'},
-    { 'name': 'DEXTEROUS GLOVES', 'modifier': 20, 'description': "Increases attack speed.", 'value': 0, 'max_value': 10, 'image': 'gloves'},
+    { 'name': 'DEXTEROUS GLOVES', 'modifier': 25, 'description': "Increases attack speed.", 'value': 0, 'max_value': 10, 'image': 'gloves'},
     { 'name': 'HEALTH POTION', 'modifier': 1000, 'description': "fully restores your health.", 'value': 0, 'max_value': 10, 'image': 'potion'},
-    { 'name': 'SNIPER CROSSBOW', 'modifier': 75, 'description': "Increases attack range.", 'value': 0, 'max_value': 10, 'image': 'crossbow'},
+    { 'name': 'EXTENDED KNIFETHROWER', 'modifier': 75, 'description': "Increases attack range.", 'value': 0, 'max_value': 10, 'image': 'crossbow'},
     { 'name': 'QUICKDRAW BACKPACK', 'modifier': 0.25, 'description': "Increases projectile speed.", 'value': 0, 'max_value': 10, 'image': 'backpack'}
 ]
 
@@ -66,7 +66,7 @@ enemy_data = {
 WORLD_MAP = [
 ['tl','t','t','t','t','t','t','t','t','t','t','t','t','t','t','t','t','t','t','tr'],
 ['l','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','r'],
-['l','e',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
+['l','R',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
@@ -78,7 +78,7 @@ WORLD_MAP = [
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
-['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','e',' ',' ',' ',' ',' ',' ','r'],
+['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','R',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
 ['l',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','r'],
