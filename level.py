@@ -117,9 +117,10 @@ class Level:
 				Enemy('bat', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 			if self.counting_time >= 120000 and self.counting_time <= 180000:
 				Enemy('spider', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
-			if self.counting_time >= 180000:
+			if self.counting_time >= 180000 and self.counting_time <= 240000:
 				Enemy('ghost', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
-
+			if self.counting_time >= 240000:
+				Enemy('cultist', (x_coord, y_coord), [self.visible_sprites, self.attackable_sprites, self.enemy_sprites], self.obstacle_sprites, self.damage_player, self.add_xp)
 	def difficulty_increase(self):
 		self.spawn_count += 1
 		# for enemy in self.enemy_sprites:

@@ -27,23 +27,27 @@ class Enemy(Entity):
             self.speed = 2.5
 
         if self.name == 'bat':
-            self.health = 11
+            self.health = 13
             self.damage = 15
             self.xp = 10
             self.speed = 2.75
 
         if self.name == 'spider':
-            self.health = 15
+            self.health = 17
             self.damage = 15
             self.xp = 15
             self.speed = 3
 
         if self.name == 'ghost':
-            self.health = 17
+            self.health = 21
             self.damage = 20
             self.xp = 20
             self.speed = 3.25
-
+        if self.name == 'cultist':
+            self.health = 26
+            self.damage = 25
+            self.xp = 25
+            self.speed = 3.5
         self.import_enemy_assets()
 
         # invincibility frames
