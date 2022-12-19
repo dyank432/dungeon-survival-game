@@ -1,5 +1,8 @@
 # Dungeon Survival Game
 
+## Video link:
+https://www.youtube.com/watch?v=gfavcnWunxE&ab_channel=DanielYankov
+
 ## Controls + Instructions:
 
 - Instructions:
