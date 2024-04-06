@@ -1,5 +1,11 @@
 # Dungeon Survival Game
 
+## Screenshots:
+
+<img width="475" alt="game_1" src="https://github.com/dyank432/dungeon-survival-game/assets/55112870/dfd78f33-308b-41e1-aea6-03301aad73f9">
+
+<img width="475" alt="game_2" src="https://github.com/dyank432/dungeon-survival-game/assets/55112870/439f7757-045c-446c-906b-b1f80a4fda04">
+
 ## Controls + Instructions:
 
 - Instructions:
